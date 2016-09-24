@@ -8,6 +8,24 @@ const getConfig = require('hjs-webpack');
 const NODE_ENV = process.env.NODE_ENV;
 const isDev = NODE_ENV === 'development';
 
+const dotenv = require('dotenv');
+const dotEnvVars = dotenv.config();
+const environmentEnv = dotenv.config({
+    path: join(root, 'config', `${NODE_ENV}.config.js`),
+    silent: true,
+});
+const envVariables =
+    Object.assign({}, dotEnvVars, environmentEnv);
+const defines =
+    Object.keys(envVariables)
+        .reduce((memo, key) => {
+            const val = JSON.stringify(envVariables[key]);
+            memo[`__${key.toUpperCase()}__`] = val;
+            return memo;
+        }, {
+            __NODE_ENV__: JSON.stringify(NODE_ENV)
+        });
+
 const root = resolve(__dirname);
 const src = join(root, 'src');
 const dest = join(root, 'dist');
@@ -19,6 +37,10 @@ var config = getConfig({
     out: join(dest),
     clearBeforeBuild: true
 });
+
+config.plugins = [
+    new webpack.DefinePlugin(defines)
+].concat(config.plugins);
 
 config.postcss = [].concat(
     require('precss')({}),
