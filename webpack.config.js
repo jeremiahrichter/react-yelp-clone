@@ -23,8 +23,7 @@ var config = getConfig({
 config.postcss = [].concat(
     require('precss')({}),
     require('autoprefixer')({}),
-    require('cssnano')({}),
-    require('stylus')({})
+    require('cssnano')({})
 );
 
 module.exports = config;
