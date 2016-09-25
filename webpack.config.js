@@ -12,6 +12,7 @@ const modules = join(root, 'node_modules');
 
 const NODE_ENV = process.env.NODE_ENV;
 const isDev = NODE_ENV === 'development';
+const isTest = NODE_ENV === 'test';
 
 const dotenv = require('dotenv');
 const dotEnvVars = dotenv.config();
@@ -37,7 +38,23 @@ var config = getConfig({
     out: join(dest),
     clearBeforeBuild: true
 });
+if (isTest) {
+    config.externals = {
+        'react/lib/ReactContext': true,
+        'react/lib/ExecutionEnvironment': true
+    }
 
+    config.plugins = config.plugins.filter(p => {
+        const name = p.constructor.toString();
+        const fnName = name.match(/^function (.*)\((.*\))/);
+
+        const idx = [
+            'DedupePlugin',
+            'UglifyJsPlugin'
+        ].indexOf(fnName[1]);
+        return idx < 0;
+    })
+}
 config.plugins = [
     new webpack.DefinePlugin(defines)
 ].concat(config.plugins);
