@@ -2,8 +2,8 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import App from './App.js'
-import styles from './App.styl'
+import App from './App'
+import styles from './styles.module.css'
 
 describe('<App />', function () {
     let wrapper;
