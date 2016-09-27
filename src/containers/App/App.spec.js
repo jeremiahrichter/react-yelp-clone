@@ -12,6 +12,7 @@ describe('<App />', function () {
     });
 
     it('has a single wrapper element', () => {
+        console.log(wrapper.find(`.wrapper`).length);
         expect(wrapper.find(`.${styles.wrapper}`))
             .to.have.length(1);
     });
