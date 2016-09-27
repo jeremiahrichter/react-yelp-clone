@@ -1,10 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-
-import styles from './styles.module.css'
+import React from 'react';
+import 'font-awesome/css/font-awesome.css';
+import styles from './styles.module.css';
 
 const App = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="wrapper">
                 <h1>

@@ -1,9 +1,8 @@
-import React from 'react'
-import { expect } from 'chai'
-import { shallow } from 'enzyme'
+import React from 'react';
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
 
-import App from './App'
-import styles from './styles.module.css'
+import App from './App';
 
 describe('<App />', function () {
     let wrapper;
@@ -12,7 +11,6 @@ describe('<App />', function () {
     });
 
     it('has a single wrapper element', () => {
-        console.log();
         expect(wrapper.find(`.wrapper`))
             .to.have.length(1);
     });
