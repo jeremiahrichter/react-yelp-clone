@@ -1,17 +1,29 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import 'font-awesome/css/font-awesome.css';
 import styles from './styles.module.css';
+import {Router} from 'react-router';
 
-const App = React.createClass({
-    render: function () {
+export default class App extends React.Component {
+    static propTypes = {
+        routes: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
+    };
+
+    //class getter
+    get content() {
         return (
-            <div className="wrapper">
-                <h1>
-                    <i className="fa fa-star"></i>
-                    Environment: {__NODE_ENV__}</h1>
-            </div>
-        )
+            <Router
+                routes={this.props.routes}
+                history={this.props.history}/>
+        );
     }
-});
 
-module.exports = App;
+    render() {
+        return (
+            <div
+                style={{height: '100%'}}>
+                {this.content}
+            </div>
+        );
+    }
+}
