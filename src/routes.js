@@ -1,16 +1,12 @@
 import React from 'react';
-import {browserHistory, Router, Route, Redirect} from 'react-router';
+import {Router} from 'react-router';
+import makeMainRoutes from './views/Main/routes';
 
-const Home = React.createClass({
-    render: function () {
-        return (<div>Hello world</div>)
-    }
-});
+const routes = makeMainRoutes();
 
 export const makeRoutes = () => (
     <Router>
-        <Route path="/" component={Home} />
-        <Redirect from="*" to="/" />
+        {routes}
     </Router>
 );
 
