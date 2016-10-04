@@ -1,13 +1,13 @@
 import React from 'react';
-import {Router} from 'react-router';
+import {Route} from 'react-router';
 import makeMainRoutes from './views/Main/routes';
 
 const main = makeMainRoutes();
 
 export const makeRoutes = () => (
-    <Router>
+    <Route path="">
         {main}
-    </Router>
+    </Route>
 );
 
 export default makeRoutes;
